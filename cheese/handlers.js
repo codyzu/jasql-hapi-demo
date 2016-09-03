@@ -5,7 +5,6 @@ export function fetchCheese (request, reply) {
   const name = request.params.name
   console.log('FETCH:', name)
   request.jasql.read(`cheese/${name}`)
-  request.models.cheese.getCheese(name)
   .then((org) => {
     reply([org])
   })
@@ -14,7 +13,8 @@ export function fetchCheese (request, reply) {
 
 export function fetchAllCheeses (request, reply) {
   console.log('FETCH ALL')
-  request.models.cheese.listCheeses()
+  // TODO filter by cheese ids
+  request.jasql.list()
   .then((cheese) => {
     reply(cheese)
   })
@@ -23,9 +23,11 @@ export function fetchAllCheeses (request, reply) {
 
 export function createCheese (request, reply) {
   console.log('CREATING')
-  request.models.cheese.createCheese(request.payload)
-  .then((cheese) => {
-    reply([cheese])
+  const cheese = request.payload
+  const cheeseDoc = defaultsDeep({_id: `cheese/${cheese.name}`}, cheese)
+  request.jasql.create(cheeseDoc)
+  .then(() => {
+    reply([cheeseDoc])
   })
   .catch((err) => reply(boom.wrap(err, err.status)))
 }
