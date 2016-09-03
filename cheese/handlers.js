@@ -34,7 +34,14 @@ export function createCheese (request, reply) {
 
 export function prepareCheeses (request, reply) {
   console.log('PREPARING')
-  reply(request.pre.cheese.map((cheese) => defaultsDeep({url: `${request.server.info.uri}/${cheese._id}`}, omit(cheese, ['_id']))))
+  reply(request.pre.cheese.map(prepareCheese))
+
+  function prepareCheese (cheese) {
+    return defaultsDeep(
+      {url: `${request.server.info.uri}/${cheese._id}`},
+      omit(cheese, ['_id'])
+    )
+  }
 }
 
 export function firstCheese (request, reply) {
