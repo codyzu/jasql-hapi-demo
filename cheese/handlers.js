@@ -58,3 +58,13 @@ export function replyCreated (request, reply) {
   console.log('CREATED')
   reply(request.pre.cheese).code(201)
 }
+
+export function deleteCheese (request, reply) {
+  const name = request.params.name
+  console.log('DELETE:', name)
+  request.jasql.del(`cheese/${name}`)
+  .then(() => {
+    reply().code(204)
+  })
+  .catch((err) => reply(boom.wrap(err, err.status)))
+}

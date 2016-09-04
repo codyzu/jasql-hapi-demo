@@ -45,3 +45,21 @@ export const post = {
   ],
   handler: handlers.replyCreated
 }
+
+export const deleteCheese = {
+  tags: ['api'],
+  plugins: {
+    'hapi-swagger': {
+      responses: {
+        '204': {'description': 'NoContent'}
+      },
+      payloadType: 'form'
+    }
+  },
+  validate: {
+    params: {
+      name: validations.name
+    }
+  },
+  handler: handlers.deleteCheese
+}

@@ -20,6 +20,12 @@ export function register (server, options, next) {
     config: config.post
   })
 
+  server.route({
+    method: 'DELETE',
+    path: '/cheese/{name}',
+    config: config.deleteCheese
+  })
+
   next()
 }
 
