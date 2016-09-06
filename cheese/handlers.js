@@ -12,9 +12,16 @@ export function fetchCheese (request, reply) {
 }
 
 export function fetchAllCheeses (request, reply) {
-  console.log('FETCH ALL')
+  let listParams = {}
+
+  if (request.query.search) {
+    console.log('SEARCH:', request.query.search)
+    listParams.search = JSON.parse(request.query.search)
+  }
+
+  console.log('FETCH ALL, SEARCH:', listParams)
   // TODO filter by cheese ids
-  request.jasql.list()
+  request.jasql.list(listParams)
   .then((cheese) => {
     reply(cheese)
   })
