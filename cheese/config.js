@@ -4,7 +4,7 @@ import * as validations from './validations'
 export const getAll = {
   tags: ['api'],
   validate: {
-    query: {search: validations.search}
+    query: validations.queryParams
   },
   response: {
     schema: validations.cheeseList

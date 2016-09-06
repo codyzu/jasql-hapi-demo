@@ -16,4 +16,9 @@ export const cheese = newCheese.concat(joi.object({
 
 export const cheeseList = joi.array().items(cheese)
 
+export const queryParams = {
+  name: joi.string(),
+  'origin.country': joi.string(),
+  'origin.region': joi.string()
+}
 export const search = joi.string()
