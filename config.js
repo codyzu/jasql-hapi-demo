@@ -6,7 +6,7 @@ export default {
 
   // hapi connections
   connections: [ {
-    port: 3000
+    port: 443
   } ],
 
   // hapi plugin registrations
