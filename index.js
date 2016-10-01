@@ -6,6 +6,12 @@ glue.compose(config, {relativeTo: __dirname}, (err, server) => {
     throw err
   }
 
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, reply) => reply.redirect('/documentation')
+  })
+
   server.start((err) => {
     if (err) {
       throw err
